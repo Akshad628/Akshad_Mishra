@@ -79,7 +79,7 @@ async def create_reach_out(payload: ReachOutCreate):
     doc['created_at'] = doc['created_at'].isoformat()
     try:
         await db.reach_outs.insert_one(doc)
-    except Exception as e:
+    except Exception:
         logging.exception("reach-out insert failed")
         raise HTTPException(status_code=500, detail="Could not save your message")
     return entry
