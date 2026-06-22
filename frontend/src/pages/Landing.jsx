@@ -9,7 +9,7 @@ import Storytelling from "../components/wr/Storytelling";
 import Reach from "../components/wr/Reach";
 import Team from "../components/wr/Team";
 import Footer from "../components/wr/Footer";
-import DashScribbles from "../components/wr/DashScribbles";
+import CursorTrail from "../components/wr/CursorTrail";
 import { Toaster } from "../components/ui/sonner";
 
 export default function Landing() {
@@ -19,6 +19,11 @@ export default function Landing() {
   return (
     <div data-testid="landing-root" className="wr-vignette relative">
       {!ready && <Preloader onDone={() => setReady(true)} />}
+      {/* Cursive cursor trail — appears once the user reaches the Reach section
+          and follows the cursor with a dashed bezier tail all the way through
+          the Team section and Footer. Fixed-position, z-0, pointer-none. */}
+      <CursorTrail startSelector="#reach" />
+
       <div id="top" />
       <Nav />
       <main className="relative z-[2]">
@@ -26,19 +31,8 @@ export default function Landing() {
         <Ateliers />
         <Services />
         <Storytelling />
-
-        {/* Background dashed scribble decor — sits between Reach + Team in the
-            deepest layer (z-0 inside its parent). Cards/forms always render
-            above because their containers carry their own backgrounds. */}
-        <div className="relative">
-          <div className="absolute inset-x-0 top-0 h-[200vh] pointer-events-none" style={{ zIndex: 0 }}>
-            <DashScribbles seed={3} density={28} />
-          </div>
-          <div className="relative" style={{ zIndex: 1 }}>
-            <Reach />
-            <Team />
-          </div>
-        </div>
+        <Reach />
+        <Team />
       </main>
       <Footer />
       <Toaster position="bottom-right" richColors />
