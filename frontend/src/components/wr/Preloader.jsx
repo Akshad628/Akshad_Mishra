@@ -42,38 +42,122 @@ export default function Preloader({ onDone }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, filter: "blur(20px)" }}
           transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
-          className="fixed inset-0 z-[100] flex items-end justify-between p-8 sm:p-14"
+          className="fixed inset-0 z-[100] flex flex-col p-8 sm:p-14"
           style={{
             background:
               "radial-gradient(ellipse at center, #f7f7f7 0%, #e9e9e9 50%, #0a0a0a 130%)",
           }}
         >
-          {/* Top label */}
-          <div className="absolute top-8 left-8 sm:top-14 sm:left-14">
-            <p className="overline">Wandel Reality</p>
-            <p className="font-mono text-[11px] mt-2 text-neutral-500">
-              v.2026 · spatial studio
-            </p>
+          {/* Top row */}
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="overline">Wandel Reality</p>
+              <p className="font-mono text-[11px] mt-2 text-neutral-500">
+                v.2026 · spatial studio
+              </p>
+            </div>
+            <div className="font-mono text-[11px] text-neutral-500 text-right">
+              <div>scene: puzzle/01</div>
+              <div>fps target: 60</div>
+            </div>
           </div>
 
-          {/* Center caption */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center px-6">
-            <motion.p
-              key={idx}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="font-display text-xl sm:text-3xl text-neutral-700"
+          {/* Center stage — rotating dashed rings around the caption */}
+          <div className="flex-1 flex items-center justify-center">
+            <div
+              data-testid="preloader-loader"
+              className="relative w-[min(78vw,460px)] aspect-square flex items-center justify-center"
             >
-              {captions[idx]}
-            </motion.p>
+              {/* Outer ring */}
+              <svg
+                viewBox="0 0 100 100"
+                className="absolute inset-0 w-full h-full"
+                style={{
+                  animation: "wr-spin-slow 14s linear infinite",
+                  transformOrigin: "50% 50%",
+                }}
+              >
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="48"
+                  fill="none"
+                  stroke="#0a0a0a"
+                  strokeWidth="1.1"
+                  strokeDasharray="2.5 3.5"
+                  strokeLinecap="round"
+                  opacity="0.85"
+                />
+              </svg>
+              {/* Inner ring (counter-rotation, denser dashes) */}
+              <svg
+                viewBox="0 0 100 100"
+                className="absolute inset-[10%] w-[80%] h-[80%]"
+                style={{
+                  animation: "wr-spin-slow 22s linear infinite reverse",
+                  transformOrigin: "50% 50%",
+                }}
+              >
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="48"
+                  fill="none"
+                  stroke="#0a0a0a"
+                  strokeWidth="0.9"
+                  strokeDasharray="1 4"
+                  strokeLinecap="round"
+                  opacity="0.6"
+                />
+              </svg>
+              {/* Tick marks at quarters */}
+              <svg
+                viewBox="0 0 100 100"
+                className="absolute inset-0 w-full h-full"
+                aria-hidden="true"
+              >
+                {[0, 90, 180, 270].map((a) => (
+                  <line
+                    key={a}
+                    x1="50"
+                    y1="2"
+                    x2="50"
+                    y2="6"
+                    stroke="#0a0a0a"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    transform={`rotate(${a} 50 50)`}
+                  />
+                ))}
+              </svg>
+
+              {/* Caption (the rotating "initialising" texts) */}
+              <div className="relative text-center px-6 max-w-[78%]">
+                <p className="overline mb-3">initialising</p>
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={idx}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.45 }}
+                    className="font-display text-base sm:text-2xl text-neutral-800 leading-tight"
+                  >
+                    {captions[idx]}
+                  </motion.p>
+                </AnimatePresence>
+                <p className="font-mono text-[10px] mt-4 text-neutral-500">
+                  {String(idx + 1).padStart(2, "0")} / {String(captions.length).padStart(2, "0")}
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* Bottom row: percent + bar */}
-          <div className="relative z-10 flex flex-col items-start w-full">
+          {/* Bottom: percent + progress bar */}
+          <div className="relative">
             <div
               data-testid="preloader-percent"
-              className="font-display text-[18vw] leading-[0.9] sm:text-[14vw] text-neutral-900"
+              className="font-display text-[18vw] sm:text-[12vw] leading-[0.9] text-neutral-900"
             >
               {String(pct).padStart(3, "0")}
             </div>
@@ -84,11 +168,6 @@ export default function Preloader({ onDone }) {
                 transition={{ ease: "linear" }}
               />
             </div>
-          </div>
-
-          <div className="absolute top-8 right-8 sm:top-14 sm:right-14 font-mono text-[11px] text-neutral-500 text-right">
-            <div>scene: puzzle/01</div>
-            <div>fps target: 60</div>
           </div>
         </motion.div>
       )}

@@ -106,7 +106,7 @@ export default function CursorTrail({ startSelector = "#reach" }) {
       className="fixed inset-0 pointer-events-none"
       style={{
         zIndex: 0,
-        opacity: active ? 0.32 : 0,
+        opacity: active ? 0.6 : 0,
         transition: "opacity 600ms ease",
       }}
       width="100%"
@@ -115,22 +115,22 @@ export default function CursorTrail({ startSelector = "#reach" }) {
       <defs>
         <filter id="wr-trail-rough" x="-10%" y="-10%" width="120%" height="120%">
           <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" />
-          <feDisplacementMap in="SourceGraphic" scale="1.2" />
+          <feDisplacementMap in="SourceGraphic" scale="1.4" />
         </filter>
         <linearGradient id="wr-trail-fade" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#0a0a0a" stopOpacity="0" />
-          <stop offset="50%" stopColor="#0a0a0a" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="#0a0a0a" stopOpacity="1" />
+          <stop offset="0%" stopColor="#050505" stopOpacity="0" />
+          <stop offset="40%" stopColor="#050505" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#050505" stopOpacity="1" />
         </linearGradient>
       </defs>
       <path
         ref={pathRef}
         fill="none"
         stroke="url(#wr-trail-fade)"
-        strokeWidth="1"
+        strokeWidth="1.7"
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeDasharray="3 7"
+        strokeDasharray="3 6"
         filter="url(#wr-trail-rough)"
         style={{
           animation: "wr-dash-march 5s linear infinite",
