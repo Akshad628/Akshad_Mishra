@@ -28,14 +28,8 @@ const TEAM = [
 
 // Crayon palette inspired by the reference: kid-drawing primaries + secondaries
 const CRAYON = [
-  "#dc2626", // red
-  "#2563eb", // blue
-  "#facc15", // yellow
-  "#16a34a", // green
-  "#9333ea", // purple
-  "#f97316", // orange
-  "#06b6d4", // cyan
-  "#db2777", // pink
+  "#dc2626", "#2563eb", "#facc15", "#16a34a",
+  "#9333ea", "#f97316", "#06b6d4", "#db2777",
 ];
 
 // Tiny deterministic PRNG so each card's scribble shape is stable across renders
@@ -47,45 +41,29 @@ function rand(seed) {
   };
 }
 
-// Build ONE big continuous looping crayon scribble — like a child scribbling
-// without lifting the pencil. We zig-zag across the canvas with multiple
-// cubic bezier segments, occasionally looping back on itself.
-function loopingScribble(r, anchor = { x: 50, y: 50 }) {
-  const steps = 14 + Math.floor(r() * 10);     // # of bezier segments
-  const cx = anchor.x + (r() - 0.5) * 30;
-  const cy = anchor.y + (r() - 0.5) * 30;
-  let px = cx;
-  let py = cy;
-  let d = `M ${px.toFixed(1)} ${py.toFixed(1)}`;
-  for (let i = 0; i < steps; i++) {
-    const ang = r() * Math.PI * 2;
-    const dist = 18 + r() * 35;
-    const nx = Math.max(-15, Math.min(115, px + Math.cos(ang) * dist));
-    const ny = Math.max(-15, Math.min(115, py + Math.sin(ang) * dist));
-    const c1x = px + (r() - 0.5) * 50;
-    const c1y = py + (r() - 0.5) * 50;
-    const c2x = nx + (r() - 0.5) * 50;
-    const c2y = ny + (r() - 0.5) * 50;
-    d += ` C ${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${nx.toFixed(1)} ${ny.toFixed(1)}`;
-    px = nx;
-    py = ny;
-  }
-  return d;
+// Short crayon scratch — single bezier with extra wiggle. Lighter feel than
+// the long looping version: feels like quick pen scratches.
+function scratchPath(r) {
+  const x0 = r() * 90 + 5;
+  const y0 = r() * 90 + 5;
+  const len = 15 + r() * 25;
+  const ang = r() * Math.PI * 2;
+  const x1 = x0 + Math.cos(ang) * len;
+  const y1 = y0 + Math.sin(ang) * len;
+  const cx = (x0 + x1) / 2 + (r() - 0.5) * 16;
+  const cy = (y0 + y1) / 2 + (r() - 0.5) * 16;
+  const wx = x1 + (r() - 0.5) * 14;
+  const wy = y1 + (r() - 0.5) * 14;
+  return `M ${x0.toFixed(1)} ${y0.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${x1.toFixed(1)} ${y1.toFixed(1)} T ${wx.toFixed(1)} ${wy.toFixed(1)}`;
 }
 
-function buildScribbles(seed) {
+function buildScribbles(seed, count = 14) {
   const r = rand(seed * 7919 + 13);
-  // 6–8 sweeping looping scribbles, each a different colour, anchored in
-  // different quadrants so together they blanket the photo.
-  const anchors = [
-    { x: 25, y: 25 }, { x: 75, y: 25 }, { x: 25, y: 75 }, { x: 75, y: 75 },
-    { x: 50, y: 50 }, { x: 50, y: 15 }, { x: 50, y: 85 }, { x: 15, y: 50 },
-  ];
-  return anchors.map((a, i) => ({
-    d: loopingScribble(r, a),
-    color: CRAYON[(i + Math.floor(r() * CRAYON.length)) % CRAYON.length],
-    width: 0.9 + r() * 0.8,
-    delay: i * 110 + r() * 80,
+  return Array.from({ length: count }, (_, i) => ({
+    d: scratchPath(r),
+    color: CRAYON[Math.floor(r() * CRAYON.length)],
+    width: 0.55 + r() * 0.75,
+    delay: i * 70 + r() * 60,
   }));
 }
 
@@ -129,18 +107,17 @@ function MemberCard({ m, i, total, progress }) {
             className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:scale-[1.12]"
             style={{ filter: color ? "none" : "grayscale(1) contrast(1.05)" }}
           />
-          {/* Crayon scribble overlay — dense child-like loops covering the photo */}
+          {/* Crayon scribble overlay — light random scratches */}
           <svg
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
-            className="absolute inset-0 w-full h-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{ mixBlendMode: "multiply" }}
+            className="absolute inset-0 w-full h-full pointer-events-none mix-blend-multiply opacity-0 group-hover:opacity-95 transition-opacity duration-300"
             aria-hidden="true"
           >
             <defs>
-              <filter id={`crayon-${i}`} x="-5%" y="-5%" width="110%" height="110%">
-                <feTurbulence type="fractalNoise" baseFrequency="2.4" numOctaves="2" seed={i + 5} />
-                <feDisplacementMap in="SourceGraphic" scale="2.6" />
+              <filter id={`crayon-${i}`}>
+                <feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed={i + 5} />
+                <feDisplacementMap in="SourceGraphic" scale="2.2" />
               </filter>
             </defs>
             {scribbles.map((s, k) => (
@@ -152,13 +129,12 @@ function MemberCard({ m, i, total, progress }) {
                 strokeWidth={s.width}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                opacity="0.9"
+                opacity="0.88"
                 filter={`url(#crayon-${i})`}
                 className="wr-scribble-path"
-                pathLength="1000"
                 style={{
-                  strokeDasharray: 1000,
-                  strokeDashoffset: 1000,
+                  strokeDasharray: 200,
+                  strokeDashoffset: 200,
                   animationDelay: `${s.delay}ms`,
                 }}
               />

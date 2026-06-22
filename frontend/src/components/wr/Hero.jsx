@@ -94,10 +94,10 @@ export default function Hero() {
         />
 
         <div className="absolute top-28 left-6 sm:left-12 z-20">
-          <p className="overline">An XR Studio · est. wandel</p>
+          <p className="overline wr-hero-text">An XR Studio · est. wandel</p>
         </div>
         <div className="absolute top-28 right-6 sm:right-12 z-20 text-right">
-          <p className="overline">Scroll · puzzle 01 / 09</p>
+          <p className="overline wr-hero-text">Scroll · puzzle 01 / 09</p>
         </div>
 
         <div className="relative w-[min(86vw,720px)] aspect-square z-10">
@@ -110,13 +110,13 @@ export default function Hero() {
           style={{ y: titleY, opacity: titleOpacity }}
           className="absolute inset-0 z-30 pointer-events-none flex flex-col items-center justify-center text-center px-6"
         >
-          <p className="overline mb-6">spatial · puzzle · reality</p>
+          <p className="overline wr-hero-text mb-6">spatial · puzzle · reality</p>
           <h1 className="font-display text-5xl sm:text-7xl lg:text-[8rem] leading-[0.92] tracking-tighter text-neutral-900">
             Wandel
             <br />
             <span className="italic font-light">Reality</span>
           </h1>
-          <p className="mt-8 max-w-xl text-neutral-600 text-base sm:text-lg">
+          <p className="mt-8 max-w-xl text-base sm:text-lg wr-hero-text-body">
             We craft immersive XR — VR, spatial design and research — one
             puzzle piece at a time.
           </p>
