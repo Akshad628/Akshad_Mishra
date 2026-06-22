@@ -224,10 +224,17 @@ body::before {
 
 /* Crayon scribble draw-on-hover */
 @keyframes wr-scribble-draw {
-  to { stroke-dashoffset: 0; }
+  0%   { stroke-dasharray: 0 200; }
+  100% { stroke-dasharray: 200 0; }
 }
 .group:hover .wr-scribble-path {
-  animation: wr-scribble-draw 1100ms cubic-bezier(.55,.05,.2,1) forwards;
+  animation: wr-scribble-draw 900ms cubic-bezier(.55,.05,.2,1) forwards;
+}
+
+/* Background dashed-line march */
+@keyframes wr-dash-march {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -60; }
 }
 
 /* Hide scrollbar but keep functionality */

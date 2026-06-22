@@ -21,28 +21,36 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Track which section is in view
+  // Track which section is in view via scroll position (deterministic — works
+  // for tall sticky sections like Hero/Storytelling that confuse IntersectionObserver)
   useEffect(() => {
-    const sections = links
-      .map((l) => document.getElementById(l.id))
-      .filter(Boolean);
-    if (!sections.length) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) setActive(visible[0].target.id);
-      },
-      {
-        // section is "active" once its middle band is within the viewport
-        rootMargin: "-35% 0px -55% 0px",
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+    const ids = links.map((l) => l.id);
+    const compute = () => {
+      const trigger = window.innerHeight * 0.35;
+      let current = "";
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        // pick the last section whose top has crossed the trigger line
+        if (rect.top <= trigger && rect.bottom > trigger) {
+          current = id;
+        } else if (rect.top <= trigger) {
+          current = id;
+        }
       }
-    );
-    sections.forEach((s) => io.observe(s));
-    return () => io.disconnect();
+      // when at very top (above first section), clear
+      const first = document.getElementById(ids[0]);
+      if (first && first.getBoundingClientRect().top > trigger) current = "";
+      setActive(current);
+    };
+    compute();
+    window.addEventListener("scroll", compute, { passive: true });
+    window.addEventListener("resize", compute);
+    return () => {
+      window.removeEventListener("scroll", compute);
+      window.removeEventListener("resize", compute);
+    };
   }, []);
 
   return (
