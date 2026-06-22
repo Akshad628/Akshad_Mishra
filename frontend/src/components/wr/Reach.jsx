@@ -119,6 +119,7 @@ export default function Reach() {
 
         <form
           onSubmit={submit}
+          noValidate
           data-testid="reach-form"
           className="md:col-span-7 wr-glass rounded-3xl p-6 sm:p-10"
         >
