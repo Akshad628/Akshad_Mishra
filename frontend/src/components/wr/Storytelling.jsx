@@ -1,3 +1,19 @@
+// =============================================================================
+// Wandel Reality — Storytelling (Meta Quest)
+//
+// EDITORIAL NOTE (for the founder):
+//   The Quest visual here is a single placeholder image. To turn this into the
+//   real "rise · rotate · explode · reassemble" cinematic you described:
+//     1. Render your Quest model in Blender / C4D as a 60fps PNG sequence
+//        (e.g. quest-0001.png … quest-0180.png — 3 seconds of explode/assemble).
+//     2. Drop the frames into /app/frontend/public/quest-frames/.
+//     3. Replace the <motion.div> with the Meta Quest <img> below with a canvas
+//        that swaps frames based on scrollYProgress (we already compute the
+//        progress here — index = Math.floor(progress * totalFrames)).
+//   The fragments below (Optics, IR Sensors, etc.) keep working as labels.
+//   Leave this comment in place so you can locate the swap point quickly.
+// =============================================================================
+
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
@@ -24,7 +40,7 @@ function Fragment({ i, f, progress }) {
       style={{ x: fx, y: fy, rotate: fr, opacity: fo }}
       className="absolute z-20 pointer-events-none"
     >
-      <div className="wr-glass-dark rounded-xl px-3 py-2 text-white text-[10px] font-mono uppercase tracking-[0.2em] flex items-center gap-2">
+      <div className="wr-glass-dark rounded-xl px-2.5 py-1.5 sm:px-3 sm:py-2 text-white text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.2em] flex items-center gap-2">
         <span className="w-1.5 h-1.5 rounded-full bg-white inline-block" />
         {f.label}
       </div>
@@ -39,7 +55,7 @@ export default function Storytelling() {
     offset: ["start end", "end start"],
   });
 
-  const lift = useTransform(scrollYProgress, [0, 0.25, 1], [60, -40, -40]);
+  const lift = useTransform(scrollYProgress, [0, 0.25, 1], [60, -20, -20]);
   const rotate = useTransform(scrollYProgress, [0.2, 0.6], [0, 360]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 0.7, 1], [0.8, 1, 1.05, 1]);
   const shadowOpacity = useTransform(scrollYProgress, [0, 0.25, 0.55, 0.8, 1], [0.3, 0.6, 0.45, 0.4, 0.55]);
@@ -52,7 +68,7 @@ export default function Storytelling() {
       data-testid="storytelling-section"
       className="relative min-h-[260vh]"
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -61,53 +77,59 @@ export default function Storytelling() {
           }}
         />
 
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 text-center px-6 z-10">
-          <p className="overline mb-3">storytelling · meta quest 3</p>
-          <h2 className="font-display text-4xl sm:text-6xl tracking-tighter text-neutral-900">
-            Anatomy of an experience
-          </h2>
-          <p className="mt-3 text-neutral-600 text-sm sm:text-base max-w-md mx-auto">
-            Scroll — watch the headset rise, rotate, break apart, and find
-            itself again.
-          </p>
+        {/* Layout: top heading band, then centered Quest stage in remaining space */}
+        <div className="relative z-10 h-full flex flex-col items-center justify-start pt-24 sm:pt-28 pb-10">
+          <div className="text-center px-6 max-w-md">
+            <p className="overline mb-2 sm:mb-3">storytelling · meta quest 3</p>
+            <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl tracking-tighter text-neutral-900 leading-[1]">
+              Anatomy of an experience
+            </h2>
+            <p className="mt-3 text-neutral-600 text-xs sm:text-base">
+              Scroll — watch the headset rise, rotate, break apart, and find
+              itself again.
+            </p>
+          </div>
+
+          {/* Quest stage */}
+          <div className="relative flex-1 w-full flex items-center justify-center">
+            <motion.div
+              style={{ opacity: shadowOpacity, scale: shadowScale }}
+              className="absolute bottom-[14%] w-[55%] max-w-[480px] h-6 rounded-[50%]"
+            >
+              <div
+                className="w-full h-full"
+                style={{
+                  background:
+                    "radial-gradient(ellipse, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 70%)",
+                  filter: "blur(6px)",
+                }}
+              />
+            </motion.div>
+
+            <motion.div style={{ y: lift, rotate, scale }} className="relative z-10">
+              <div className="relative w-[min(78vw,520px)] aspect-[16/10] rounded-[24px] overflow-hidden wr-glass">
+                <img
+                  src={QUEST_IMG}
+                  alt="Meta Quest headset"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-black/30 via-transparent to-white/20" />
+                <div className="absolute top-3 left-3 text-white font-mono text-[10px] uppercase tracking-[0.25em] bg-black/40 px-2 py-1 rounded-full">
+                  quest 3 · render
+                </div>
+              </div>
+            </motion.div>
+
+            {FRAGMENTS.map((f, i) => (
+              <Fragment key={i} i={i} f={f} progress={scrollYProgress} />
+            ))}
+          </div>
         </div>
 
-        <motion.div
-          style={{ opacity: shadowOpacity, scale: shadowScale }}
-          className="absolute bottom-[18%] w-[60%] max-w-[520px] h-6 rounded-[50%]"
-        >
-          <div
-            className="w-full h-full"
-            style={{
-              background:
-                "radial-gradient(ellipse, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 70%)",
-              filter: "blur(6px)",
-            }}
-          />
-        </motion.div>
-
-        <motion.div style={{ y: lift, rotate, scale }} className="relative z-10">
-          <div className="relative w-[min(70vw,560px)] aspect-[16/10] rounded-[28px] overflow-hidden wr-glass">
-            <img
-              src={QUEST_IMG}
-              alt="Meta Quest headset"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-black/30 via-transparent to-white/20" />
-            <div className="absolute top-3 left-3 text-white font-mono text-[10px] uppercase tracking-[0.25em] bg-black/40 px-2 py-1 rounded-full">
-              quest 3 · render
-            </div>
-          </div>
-        </motion.div>
-
-        {FRAGMENTS.map((f, i) => (
-          <Fragment key={i} i={i} f={f} progress={scrollYProgress} />
-        ))}
-
-        <div className="absolute bottom-10 left-6 sm:left-12 font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-500">
+        <div className="absolute bottom-6 left-4 sm:left-12 font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-neutral-500 z-10">
           rise · rotate · explode · reassemble
         </div>
-        <div className="absolute bottom-10 right-6 sm:right-12 font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-500">
+        <div className="absolute bottom-6 right-4 sm:right-12 font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-neutral-500 z-10">
           scene 04
         </div>
       </div>

@@ -60,7 +60,7 @@ export default function Reach() {
         <div className="md:col-span-5">
           <p className="overline mb-4">reach out · 03</p>
           <h2 className="font-display text-5xl sm:text-6xl tracking-tighter text-neutral-900">
-            Let's build a world
+            Let{"\u2019"}s build a world
           </h2>
           <p className="mt-5 text-neutral-600 text-base sm:text-lg max-w-md">
             Guidance, collaboration or a quiet query — drop us a line. We
@@ -211,7 +211,9 @@ export default function Reach() {
   );
 }
 
-function Field({ icon: Icon, label, testid, ...props }) {
+function Field({ icon: Icon, label, testid, value, ...props }) {
+  const [focused, setFocused] = useState(false);
+  const hide = focused || (typeof value === "string" && value.length > 0);
   return (
     <div>
       <label className="overline">{label}</label>
@@ -219,12 +221,19 @@ function Field({ icon: Icon, label, testid, ...props }) {
         {Icon && (
           <Icon
             size={16}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500"
+            className={`absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none transition-all duration-300 ${
+              hide ? "opacity-0 -translate-x-2" : "opacity-100"
+            }`}
           />
         )}
         <input
           data-testid={testid}
-          className={`wr-skeu-input ${Icon ? "pl-9" : ""}`}
+          className={`wr-skeu-input transition-[padding] duration-300 ${
+            Icon ? (hide ? "pl-3.5" : "pl-9") : ""
+          }`}
+          value={value}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
           {...props}
         />
       </div>

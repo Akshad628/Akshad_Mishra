@@ -120,7 +120,7 @@ export default function Hero() {
             We craft immersive XR — VR, spatial design and research — one
             puzzle piece at a time.
           </p>
-          <div className="mt-10 flex items-center gap-3 pointer-events-auto">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3 pointer-events-auto">
             <a href="#ateliers" data-testid="hero-cta-projects" className="wr-skeu-btn">
               Enter the ateliers
             </a>
