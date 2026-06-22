@@ -2,15 +2,19 @@ import { useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { Loader2, Send, Calendar, Mail, Phone, User, Globe } from "lucide-react";
+import { Loader2, Send, Calendar, Mail, Phone, User, Globe, X, ExternalLink } from "lucide-react";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const BOOKING_URL = process.env.REACT_APP_BOOKING_URL || "";
+const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL || "hello@wandelreality.studio";
+const CONTACT_PHONE = process.env.REACT_APP_CONTACT_PHONE || "";
 
 const empty = { name: "", email: "", phone: "", subject: "", body: "", website: "" };
 
 export default function Reach() {
   const [form, setForm] = useState(empty);
   const [loading, setLoading] = useState(false);
+  const [bookOpen, setBookOpen] = useState(false);
 
   const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
@@ -36,6 +40,16 @@ export default function Reach() {
     }
   };
 
+  const openBooking = (e) => {
+    e.preventDefault();
+    if (BOOKING_URL) setBookOpen(true);
+    else
+      toast.message("Booking not configured", {
+        description:
+          "Set REACT_APP_BOOKING_URL in frontend/.env to your Google Calendar Appointment Schedule URL.",
+      });
+  };
+
   return (
     <section
       id="reach"
@@ -53,13 +67,12 @@ export default function Reach() {
             answer in two business days.
           </p>
 
-          <motion.a
-            href="https://calendar.app.google/"
-            target="_blank"
-            rel="noreferrer"
+          <motion.button
+            type="button"
+            onClick={openBooking}
             data-testid="reach-book-call"
             whileHover={{ y: -3 }}
-            className="mt-8 wr-glass rounded-2xl p-5 flex items-center gap-4 group"
+            className="mt-8 wr-glass rounded-2xl p-5 flex items-center gap-4 group w-full text-left"
           >
             <div
               className="w-12 h-12 rounded-xl flex items-center justify-center"
@@ -74,20 +87,33 @@ export default function Reach() {
             <div className="flex-1">
               <div className="font-display text-lg leading-tight">Book a 30-min call</div>
               <div className="text-xs text-neutral-500 mt-0.5">
-                Google Calendar · pick a slot that works for you
+                {BOOKING_URL ? "Google Calendar · pick a slot" : "Not configured yet — see setup"}
               </div>
             </div>
             <span className="font-mono text-xs underline underline-offset-4">
               Open ↗
             </span>
-          </motion.a>
+          </motion.button>
 
           <div className="mt-10 space-y-2 text-sm text-neutral-600">
             <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-500">
               direct
             </p>
-            <p>hello@wandelreality.studio</p>
-            <p>+91 · on request</p>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              data-testid="reach-email-link"
+              className="block hover:text-neutral-900"
+            >
+              {CONTACT_EMAIL}
+            </a>
+            {CONTACT_PHONE && (
+              <a
+                href={`tel:${CONTACT_PHONE.replace(/\s/g, "")}`}
+                className="block hover:text-neutral-900"
+              >
+                {CONTACT_PHONE}
+              </a>
+            )}
           </div>
         </div>
 
@@ -97,48 +123,14 @@ export default function Reach() {
           className="md:col-span-7 wr-glass rounded-3xl p-6 sm:p-10"
         >
           <div className="grid sm:grid-cols-2 gap-4">
-            <Field
-              icon={User}
-              label="Name"
-              testid="reach-name"
-              value={form.name}
-              onChange={update("name")}
-              required
-            />
-            <Field
-              icon={Mail}
-              label="Email"
-              type="email"
-              testid="reach-email"
-              value={form.email}
-              onChange={update("email")}
-              required
-            />
-            <Field
-              icon={Phone}
-              label="Phone"
-              testid="reach-phone"
-              value={form.phone}
-              onChange={update("phone")}
-            />
-            <Field
-              icon={Globe}
-              label="Website"
-              testid="reach-website"
-              value={form.website}
-              onChange={update("website")}
-              placeholder="https://"
-            />
+            <Field icon={User} label="Name" testid="reach-name" value={form.name} onChange={update("name")} required />
+            <Field icon={Mail} label="Email" type="email" testid="reach-email" value={form.email} onChange={update("email")} required />
+            <Field icon={Phone} label="Phone" testid="reach-phone" value={form.phone} onChange={update("phone")} />
+            <Field icon={Globe} label="Website" testid="reach-website" value={form.website} onChange={update("website")} placeholder="https://" />
           </div>
 
           <div className="mt-4">
-            <Field
-              label="Subject"
-              testid="reach-subject"
-              value={form.subject}
-              onChange={update("subject")}
-              required
-            />
+            <Field label="Subject" testid="reach-subject" value={form.subject} onChange={update("subject")} required />
           </div>
 
           <div className="mt-4">
@@ -157,12 +149,7 @@ export default function Reach() {
             <p className="text-xs text-neutral-500">
               By submitting you agree to our friendly use of your information.
             </p>
-            <button
-              type="submit"
-              data-testid="reach-submit"
-              disabled={loading}
-              className="wr-skeu-btn"
-            >
+            <button type="submit" data-testid="reach-submit" disabled={loading} className="wr-skeu-btn">
               {loading ? (
                 <>
                   <Loader2 size={16} className="animate-spin" /> Sending
@@ -176,6 +163,49 @@ export default function Reach() {
           </div>
         </form>
       </div>
+
+      {/* Booking modal — appears only when REACT_APP_BOOKING_URL is set */}
+      {bookOpen && BOOKING_URL && (
+        <div
+          data-testid="booking-modal"
+          className="fixed inset-0 z-[80] flex items-center justify-center p-4 sm:p-8"
+          style={{ background: "rgba(0,0,0,0.65)", backdropFilter: "blur(8px)" }}
+        >
+          <div className="relative w-full max-w-4xl h-[80vh] wr-glass rounded-3xl overflow-hidden">
+            <div className="flex items-center justify-between p-4 border-b border-white/30">
+              <div>
+                <p className="overline">book a call</p>
+                <p className="font-display text-lg mt-1">Pick a time that works</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-3 py-2 text-xs font-medium rounded-full bg-white/70 hover:bg-white inline-flex items-center gap-1.5"
+                >
+                  Open in new tab <ExternalLink size={12} />
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setBookOpen(false)}
+                  data-testid="booking-close"
+                  className="w-9 h-9 rounded-full bg-white/70 hover:bg-white inline-flex items-center justify-center"
+                  aria-label="Close"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+            </div>
+            <iframe
+              title="Booking"
+              src={BOOKING_URL}
+              className="w-full h-[calc(80vh-72px)] bg-white"
+              frameBorder="0"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

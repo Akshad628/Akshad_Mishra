@@ -1,5 +1,14 @@
 import { Github, Linkedin, Instagram, Twitter, ArrowUpRight } from "lucide-react";
 
+const SOCIALS = [
+  { Icon: Github, url: process.env.REACT_APP_SOCIAL_GITHUB, label: "github" },
+  { Icon: Linkedin, url: process.env.REACT_APP_SOCIAL_LINKEDIN, label: "linkedin" },
+  { Icon: Instagram, url: process.env.REACT_APP_SOCIAL_INSTAGRAM, label: "instagram" },
+  { Icon: Twitter, url: process.env.REACT_APP_SOCIAL_TWITTER, label: "twitter" },
+].filter((s) => s.url);
+
+const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL || "hello@wandelreality.studio";
+
 export default function Footer() {
   return (
     <footer
@@ -51,11 +60,10 @@ export default function Footer() {
           <Col
             title="Studio"
             links={[
-              ["About", "#"],
-              ["Press", "#"],
-              ["Careers", "#"],
-              ["Privacy", "#"],
-              ["Terms", "#"],
+              ["About", "#ateliers"],
+              ["Services", "#services"],
+              ["Reach", "#reach"],
+              ["Team", "#team"],
             ]}
           />
 
@@ -68,13 +76,15 @@ export default function Footer() {
               <br />
               Bengaluru · IN
             </p>
-            <p className="mt-4 text-sm text-neutral-300 leading-relaxed">
-              hello@wandelreality.studio
-            </p>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="mt-4 block text-sm text-neutral-300 hover:text-white"
+            >
+              {CONTACT_EMAIL}
+            </a>
           </div>
         </div>
 
-        {/* Big wordmark */}
         <div className="py-16 select-none">
           <div className="font-display text-[18vw] sm:text-[14vw] leading-[0.85] tracking-tighter text-white/95">
             wandel reality
@@ -86,12 +96,23 @@ export default function Footer() {
 
         <div className="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-neutral-500">
           <p>© {new Date().getFullYear()} Wandel Reality. All rights reserved.</p>
-          <div className="flex items-center gap-3">
-            <SocialIcon Icon={Github} label="github" />
-            <SocialIcon Icon={Linkedin} label="linkedin" />
-            <SocialIcon Icon={Instagram} label="instagram" />
-            <SocialIcon Icon={Twitter} label="twitter" />
-          </div>
+          {SOCIALS.length > 0 && (
+            <div className="flex items-center gap-3">
+              {SOCIALS.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={s.label}
+                  data-testid={`social-${s.label}`}
+                  className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center hover:bg-white hover:text-black transition"
+                >
+                  <s.Icon size={14} />
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </footer>
@@ -115,18 +136,5 @@ function Col({ title, links }) {
         ))}
       </ul>
     </div>
-  );
-}
-
-function SocialIcon({ Icon, label }) {
-  return (
-    <a
-      href="#"
-      aria-label={label}
-      data-testid={`social-${label}`}
-      className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center hover:bg-white hover:text-black transition"
-    >
-      <Icon size={14} />
-    </a>
   );
 }
