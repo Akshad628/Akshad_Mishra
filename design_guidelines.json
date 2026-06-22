@@ -1,0 +1,173 @@
+{
+  "theme": "puzzle_xr",
+  "archetype": "Hybrid: Archetype 4 (Swiss & High-Contrast) + Archetype 5 (Luxury/Cinematic)",
+  "vibe": "Professional, Bold, Immersive, Spatial",
+  "colors": {
+    "background": {
+      "primary": "#FFFFFF",
+      "vignette": "radial-gradient(circle at center, #FFFFFF 20%, #0A0A0A 100%)",
+      "surface": "rgba(255, 255, 255, 0.05)",
+      "surface_dark": "rgba(10, 10, 10, 0.4)"
+    },
+    "text": {
+      "primary": "#050505",
+      "primary_inverse": "#F5F5F5",
+      "secondary": "#555555",
+      "secondary_inverse": "#A0A0A0"
+    },
+    "accent": {
+      "primary": "#1A1A1A",
+      "glow": "rgba(0, 0, 0, 0.15)"
+    },
+    "border": {
+      "glass": "rgba(255, 255, 255, 0.2)",
+      "glass_dark": "rgba(0, 0, 0, 0.1)"
+    }
+  },
+  "typography": {
+    "font_family": {
+      "headings": "'Clash Display', sans-serif",
+      "body": "'Outfit', sans-serif",
+      "mono": "'JetBrains Mono', monospace"
+    },
+    "hierarchy": {
+      "h1": "text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tighter",
+      "h2": "text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight",
+      "h3": "text-2xl sm:text-3xl font-medium tracking-tight",
+      "body": "text-base sm:text-lg leading-relaxed font-light",
+      "overline": "text-xs font-bold uppercase tracking-[0.2em]"
+    }
+  },
+  "effects": {
+    "glassmorphism": {
+      "backdrop_blur": "backdrop-blur-2xl",
+      "background": "bg-white/10 dark:bg-black/20",
+      "border": "border border-white/20 dark:border-white/10",
+      "shadow": "shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
+    },
+    "skeuomorphism": {
+      "inner_shadow": "shadow-[inset_0_2px_4px_rgba(255,255,255,0.3)]",
+      "button": "bg-gradient-to-b from-[#2A2A2A] to-[#0A0A0A] shadow-[0_10px_20px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] text-white",
+      "surface_highlight": "bg-gradient-to-br from-white/40 to-transparent"
+    },
+    "parallax": {
+      "global": "Mandatory throughout the site. Use mouse movement tracking for local X/Y depth, and scroll position for global Z depth.",
+      "layers": "Separate background, midground, and foreground elements. Foregrounds move 2x faster than backgrounds."
+    },
+    "scroll": {
+      "library": "Lenis",
+      "config": "smoothWheel: true, duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))"
+    }
+  },
+  "sections": [
+    {
+      "id": "preloader",
+      "description": "0 to 100% counter with cinematic scene setting up in the background as a caption.",
+      "motion": "Counter increments rapidly. Background fades in via a dark vignette mask. Elements scale down to 1 upon reaching 100%."
+    },
+    {
+      "id": "hero",
+      "description": "Hero section featuring an abstract puzzle image. Context goes with aesthetics.",
+      "motion": "Scroll down: Image breaks and fades into puzzle pieces. Scroll up: Pieces reassemble. Mouse move: Cursor-driven 3D parallax depth mapping across the broken pieces.",
+      "layout": "Full viewport height. High contrast text overlaid on the interactive puzzle canvas."
+    },
+    {
+      "id": "ateliers",
+      "description": "Projects section (Silence That Remains, HCI, ISRO GSLV VR).",
+      "layout": "Left-aligned Vertical Circular Bento Grid.",
+      "motion": "Sweeper cards reveal on scroll along a curved path from the left. Cards must have spacing to preview, strictly no stacking/overlapping."
+    },
+    {
+      "id": "services",
+      "description": "XR Craft End to End list (Immersive Design, VR Dev, 3D Content, Spatial Audio, Tech Consulting, R&I).",
+      "layout": "Structured minimalist grid or list format.",
+      "motion": "Hover effects using glass-skeuomorphism mix. Subtle lift and inner glow on hover."
+    },
+    {
+      "id": "storytelling",
+      "description": "Meta Quest 360 interactive scene.",
+      "layout": "Central focal point over a plane surface.",
+      "motion": "On scroll: Headset hovers above the surface, rotates 360 in a cinematic manner, explodes to expose inside components with detailing/zooming, and reassembles before the scroll ends."
+    },
+    {
+      "id": "reach",
+      "description": "Reach out form and Google Calendar booking.",
+      "layout": "Split view: Contact form (Name, Email, Number, Subject, Body, Website) on one side, Google Calendar integration on the other.",
+      "motion": "Fade up on scroll with slight parallax. Inputs use skeuomorphic recessed styling."
+    },
+    {
+      "id": "team",
+      "description": "11 team members introduced with name, job, description.",
+      "layout": "Right-aligned Vertical Circular Bento Grid (opposite to ateliers).",
+      "motion": "Sweeper cards reveal on scroll along a curved path from the right. Clear spacing, no overlapping."
+    },
+    {
+      "id": "footer",
+      "description": "Company details and incorporations.",
+      "layout": "Expansive spacing (py-24 or py-32). Monochrome, bold typography."
+    }
+  ],
+  "components": {
+    "sweeper_card": {
+      "base": "relative overflow-hidden rounded-3xl p-8 transition-all duration-500",
+      "style": "Glassmorphism with skeuomorphic inner borders. bg-white/10 border border-white/20 backdrop-blur-xl",
+      "animation": "Enter from an arc path, maintain distinct gaps (gap-8 minimum) to prevent stacking."
+    },
+    "puzzle_canvas": {
+      "description": "Custom canvas or deeply nested DOM structure managing the broken puzzle pieces. Needs data-depth attributes for parallax."
+    }
+  },
+  "image_urls": [
+    {
+      "category": "hero_puzzle_abstract",
+      "description": "Abstract 3D fractured sphere geometric shapes",
+      "url": "https://images.pexels.com/photos/9789216/pexels-photo-9789216.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "category": "hero_puzzle_abstract_alt",
+      "description": "Top view of incomplete white puzzle pieces",
+      "url": "https://images.pexels.com/photos/8066783/pexels-photo-8066783.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "category": "project_silence_jungle",
+      "description": "Ethereal fog envelops a lush, verdant forest",
+      "url": "https://images.pexels.com/photos/13346329/pexels-photo-13346329.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "category": "project_isro_rocket",
+      "description": "Vostok rocket displayed against a dramatic sky",
+      "url": "https://images.pexels.com/photos/33544772/pexels-photo-33544772.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "category": "storytelling_meta_quest",
+      "description": "Virtual reality headset and controllers in low light",
+      "url": "https://images.unsplash.com/photo-1780547292624-8bc828bdae07?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwxfHxtZXRhJTIwcXVlc3QlMjBWUiUyMGhlYWRzZXR8ZW58MHx8fHwxNzgyMTQ4Mzg0fDA&ixlib=rb-4.1.0&q=85"
+    },
+    {
+      "category": "team_member_1",
+      "description": "Professional young man in a blue suit",
+      "url": "https://images.pexels.com/photos/26872232/pexels-photo-26872232.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "category": "team_member_2",
+      "description": "Confident woman in business attire",
+      "url": "https://images.pexels.com/photos/31869537/pexels-photo-31869537.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "category": "team_member_3",
+      "description": "Woman smiling professional headshot",
+      "url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMHBvcnRyYWl0fGVufDB8fHx8MTc4MjE0ODM5M3ww&ixlib=rb-4.1.0&q=85"
+    }
+  ],
+  "instructions_to_main_agent": [
+    "CRITICAL: All interactive and key informational elements MUST include a 'data-testid' attribute (e.g., data-testid='reach-out-submit').",
+    "CRITICAL: Use 'Lenis' for smooth scrolling globally. Instantiate it at the top level of the React app.",
+    "CRITICAL: Use GSAP ScrollTrigger and Framer Motion for scroll-linked animations. The Meta Quest explosion and Puzzle breaking MUST be tied to scroll progress.",
+    "CRITICAL: The background MUST use a heavy white to black radial gradient (vignette). Do not use a flat white background. Wrap the main layout in a container that renders this vignette.",
+    "CRITICAL: Do NOT use Inter or Space Grotesk. Use 'Clash Display' for headings and 'Outfit' for body text. Inject these via Google Fonts or standard imports in index.css.",
+    "CRITICAL: The 'Sweeper Cards' in the Ateliers and Team sections must use vertical circular layouts. Left side for Ateliers, Right side for Team. Use GSAP motion paths or staggered curved transforms. Ensure they do NOT stack on top of each other; use margin or spacer divs so they push the scroll rather than overlapping.",
+    "CRITICAL: Mix glassmorphism and skeuomorphism. Cards should have a frosted glass background (backdrop-blur) but feature skeuomorphic details like inner highlights (inset shadows) to feel tactile.",
+    "CRITICAL: Implement mouse-move parallax on the Hero section puzzle pieces. Multiply the cursor position by different depth modifiers for each piece.",
+    "CRITICAL: The code must be in .js/.jsx, not .tsx. Do not use TypeScript syntax."
+  ]
+}
