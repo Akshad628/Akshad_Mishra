@@ -5,7 +5,7 @@ import "./App.css";
 export default function App() {
   return (
     <div className="App">
-      <BrowserRouter basename="/Akshad_Mishra">
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
         </Routes>
