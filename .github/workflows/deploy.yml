@@ -35,9 +35,23 @@ jobs:
         env:
           CI: false
 
+      - name: Verify build output
+        working-directory: ./frontend/build
+        run: |
+          echo "=== Build folder contents ==="
+          ls -la
+          echo "=== Checking index.html ==="
+          if [ -f index.html ]; then echo "✓ index.html found"; else echo "✗ index.html missing"; fi
+          echo "=== Checking 404.html ==="
+          if [ -f 404.html ]; then echo "✓ 404.html found"; else echo "✗ 404.html missing"; fi
+          echo "=== Checking .nojekyll ==="
+          if [ -f .nojekyll ]; then echo "✓ .nojekyll found"; else echo "✗ .nojekyll missing"; fi
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./frontend/build
           force_orphan: true
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
