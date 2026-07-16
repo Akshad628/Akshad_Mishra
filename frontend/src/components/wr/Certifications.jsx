@@ -6,8 +6,8 @@ const CERTS = [
   { name: "C Programming", by: "NPTEL", year: "2023" },
   { name: "Python — 100 Days Bootcamp", by: "Udemy", year: "2024" },
   { name: "Full-Stack Development (MERN)", by: "Udemy", year: "2025" },
-  { name: "Introduction to AI", by: "Sample cert", year: "2024", url: "https://customer-assets-eiarnc6j.emergentagent.net/job_wandel-reality/artifacts/5605l3mv_Intro_AI_Akshad.pdf" },
-  { name: "Quantum Computing", by: "Sample cert", year: "2024", url: "https://customer-assets-eiarnc6j.emergentagent.net/job_wandel-reality/artifacts/y6ya57u8_Quantum_Computing_Akshad.pdf" },
+  { name: "Introduction to AI", by: "Sample cert", year: "2024" },
+  { name: "Quantum Computing", by: "Sample cert", year: "2024" },
 ];
 
 export default function Certifications() {

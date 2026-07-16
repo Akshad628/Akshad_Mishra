@@ -13,7 +13,7 @@ const PHONE = process.env.REACT_APP_CONTACT_PHONE || "+91 74164 47332";
 const GH = process.env.REACT_APP_SOCIAL_GITHUB || "https://github.com/Akshad628";
 const LN = process.env.REACT_APP_SOCIAL_LINKEDIN || "https://www.linkedin.com/in/akshadmishra";
 const LC = "https://leetcode.com/akshad_mishra/";
-const RESUME = process.env.REACT_APP_RESUME_URL || "https://customer-assets-eiarnc6j.emergentagent.net/job_wandel-reality/artifacts/qro3nj70_Akshad_2026.docx";
+const RESUME = process.env.REACT_APP_RESUME_URL || "#";
 
 const empty = { name: "", email: "", phone: "", subject: "", body: "", website: "" };
 

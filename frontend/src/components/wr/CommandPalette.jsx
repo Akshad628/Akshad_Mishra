@@ -20,7 +20,7 @@ const GH = "https://github.com/Akshad628";
 const LN = "https://www.linkedin.com/in/akshadmishra";
 const LC = "https://leetcode.com/akshad_mishra/";
 const EM = "akshadmishra628@gmail.com";
-const RESUME = process.env.REACT_APP_RESUME_URL || "https://customer-assets-eiarnc6j.emergentagent.net/job_wandel-reality/artifacts/qro3nj70_Akshad_2026.docx";
+const RESUME = process.env.REACT_APP_RESUME_URL || "#";
 
 const SECTIONS = [
   { id: "projects", label: "Projects" },
