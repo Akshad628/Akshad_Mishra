@@ -111,7 +111,6 @@ function LeetCodeBlock() {
     (async () => {
       const endpoints = [
         `https://leetcode-api-faisalshohag.vercel.app/${LC_USER}`,
-        `https://leetcode-stats-api.herokuapp.com/${LC_USER}`,
         `https://alfa-leetcode-api.onrender.com/${LC_USER}/solved`,
       ];
       for (const url of endpoints) {

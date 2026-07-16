@@ -18,7 +18,7 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-app = FastAPI(title="Wandel Reality API")
+app = FastAPI(title="akshad.dev API")
 api_router = APIRouter(prefix="/api")
 
 
@@ -51,7 +51,7 @@ class ReachOut(ReachOutCreate):
 
 @api_router.get("/")
 async def root():
-    return {"message": "Wandel Reality API online"}
+    return {"message": "akshad.dev API online"}
 
 
 @api_router.post("/status", response_model=StatusCheck)
