@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Akshad_Mishra/static/css/main.5ab506df.css",
+    "main.js": "/Akshad_Mishra/static/js/main.0d25e454.js",
+    "index.html": "/Akshad_Mishra/index.html",
+    "main.5ab506df.css.map": "/Akshad_Mishra/static/css/main.5ab506df.css.map",
+    "main.0d25e454.js.map": "/Akshad_Mishra/static/js/main.0d25e454.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5ab506df.css",
+    "static/js/main.0d25e454.js"
+  ]
+}
