@@ -222,6 +222,15 @@ body::before {
   animation: wr-spin-slow 28s linear infinite;
 }
 
+/* God-mode (Konami/full-collect) */
+@keyframes wr-hue-shift {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50%      { filter: hue-rotate(360deg); }
+}
+.wr-god-mode {
+  animation: wr-hue-shift 6s linear;
+}
+
 /* Hero text on top of dark-blue puzzle: invert via blend mode so it reads
    well on both the dark-blue pieces AND the white grid. */
 .wr-hero-text,

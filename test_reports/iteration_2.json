@@ -1,0 +1,32 @@
+{
+  "summary": "Full re-test of pivoted Akshad Mishra personal portfolio (was Wandel Reality). Backend 6/6 pytest cases pass (root, reach-out full/min payload, 422 validations, list ordering, persistence). Frontend: all 18 requested checks pass — preloader clears, no 'Wandel Reality' branding anywhere in-page (the single 'wandel' hit is a live GitHub repo name from @Akshad628, not our copy), hero + 9 puzzle pieces, 6-link nav with akshad.dev logo, 4 project cards, 6 skill cards, 3 reel items, GitHub block (@Akshad628, 6 repo cards, 56 contributions) + LeetCode block (@akshad_mishra, 80 solved, Easy/Med/Hard = 44/32/4), timeline with all 5 nodes (B.Tech, Infosys, Visvam.ai, NRSC, KV Picket), 6 cert cards with cert-4/-5 external PDF hrefs, reach form + 6 quick-action tiles (no calendar), footer socials all present. Gamification verified: XPBar reaches 'LVL 08 · CLEAR!' at bottom, Cmd+K opens command palette, typing 'play' filters to /play and launches Breakout minigame, Konami code triggers god mode + inventory HUD showing 6/6, all 6 CollectibleSpot buttons present. Reach form submit returns 200 + shows 'Message sent' toast. No console/page errors (only expected CORS on legacy leetcode-stats-api.herokuapp.com fallback — primary vercel API returns correct data).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_reach_out.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Optional: remove the legacy leetcode-stats-api.herokuapp.com fallback fetch from Stats.jsx — it's CORS-blocked and produces console errors even though the primary faisalshohag vercel endpoint succeeds. Harmless but noisy.",
+    "Optional: FastAPI app title is still 'Wandel Reality API' and root endpoint returns 'Wandel Reality API online' — not visible to end-users but worth rebranding to akshad.dev API for consistency.",
+    "Optional/nit: page contains the substring 'wandel' once because @Akshad628 has a public GitHub repo literally named 'wandel'; this is live user data, not our copy. If strict zero-wandel is desired, filter that repo out in Stats.jsx.",
+    "Optional: server.py still uses deprecated @app.on_event('shutdown'); migrate to lifespan handlers."
+  ],
+  "critical_code_review_comments": [
+    "Stats.jsx makes multiple LeetCode fallback fetches; one endpoint (leetcode-stats-api.herokuapp.com) is permanently CORS-blocked from the preview origin — should be removed or replaced.",
+    "CORS in server.py uses allow_credentials=True with default allow_origins='*' — invalid per spec; set CORS_ORIGINS explicitly for prod.",
+    "Backend title/root message still branded 'Wandel Reality'; frontend has been pivoted but backend metadata was not updated."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "N/A — no auth in app.",
+  "seed_data_creation": "A handful of TEST_ prefixed docs inserted into db.reach_outs during pytest and one via UI submit test.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend endpoints unchanged from iteration 1 — same /api/reach-out contract. Frontend fully pivoted to Akshad Mishra portfolio. Preloader takes ~4s; wait before scraping. LeetCode primary API is leetcode-api-faisalshohag.vercel.app; fallback herokuapp CORS-blocked (ignore console error). Konami god mode auto-fills inventory to 6/6, so clicking collectibles after Konami won't change the counter — test collectibles before Konami if verifying increment.",
+  "rca of the issue": "No blocking issues found."
+}

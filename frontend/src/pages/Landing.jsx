@@ -3,13 +3,20 @@ import useLenisScroll from "../lib/useLenis";
 import Preloader from "../components/wr/Preloader";
 import Nav from "../components/wr/Nav";
 import Hero from "../components/wr/Hero";
-import Ateliers from "../components/wr/Ateliers";
-import Services from "../components/wr/Services";
-import Storytelling from "../components/wr/Storytelling";
+import Projects from "../components/wr/Projects";
+import Skills from "../components/wr/Skills";
+import Reel3D from "../components/wr/Reel3D";
+import Stats from "../components/wr/Stats";
+import About from "../components/wr/About";
+import Certifications from "../components/wr/Certifications";
 import Reach from "../components/wr/Reach";
-import Team from "../components/wr/Team";
 import Footer from "../components/wr/Footer";
 import CursorTrail from "../components/wr/CursorTrail";
+import XPBar from "../components/wr/XPBar";
+import CommandPalette from "../components/wr/CommandPalette";
+import Konami from "../components/wr/Konami";
+import { InventoryHUD } from "../components/wr/CollectibleSpot";
+import { AchievementsProvider } from "../components/wr/Achievements";
 import { Toaster } from "../components/ui/sonner";
 
 export default function Landing() {
@@ -17,25 +24,29 @@ export default function Landing() {
   useLenisScroll();
 
   return (
-    <div data-testid="landing-root" className="wr-vignette relative">
-      {!ready && <Preloader onDone={() => setReady(true)} />}
-      {/* Cursive cursor trail — appears once the user reaches the Reach section
-          and follows the cursor with a dashed bezier tail all the way through
-          the Team section and Footer. Fixed-position, z-0, pointer-none. */}
-      <CursorTrail startSelector="#reach" />
-
-      <div id="top" />
-      <Nav />
-      <main className="relative z-[2]">
-        <Hero />
-        <Ateliers />
-        <Services />
-        <Storytelling />
-        <Reach />
-        <Team />
-      </main>
-      <Footer />
-      <Toaster position="bottom-right" richColors />
-    </div>
+    <AchievementsProvider>
+      <div data-testid="landing-root" className="wr-vignette relative">
+        {!ready && <Preloader onDone={() => setReady(true)} />}
+        <CursorTrail startSelector="#projects" />
+        <XPBar />
+        <CommandPalette />
+        <Konami />
+        <InventoryHUD />
+        <div id="top" />
+        <Nav />
+        <main className="relative z-[2]">
+          <Hero />
+          <Projects />
+          <Skills />
+          <Reel3D />
+          <Stats />
+          <About />
+          <Certifications />
+          <Reach />
+        </main>
+        <Footer />
+        <Toaster position="bottom-right" richColors />
+      </div>
+    </AchievementsProvider>
   );
 }
