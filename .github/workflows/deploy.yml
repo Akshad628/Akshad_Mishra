@@ -5,13 +5,8 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,23 +30,15 @@ jobs:
         env:
           CI: false
 
-      - name: Verify build output
-        working-directory: ./frontend/build
+      - name: Copy build to docs folder
         run: |
-          echo "=== Build folder contents ==="
-          ls -la
-          echo "=== Checking index.html ==="
-          if [ -f index.html ]; then echo "✓ index.html found"; else echo "✗ index.html missing"; fi
-          echo "=== Checking 404.html ==="
-          if [ -f 404.html ]; then echo "✓ 404.html found"; else echo "✗ 404.html missing"; fi
-          echo "=== Checking .nojekyll ==="
-          if [ -f .nojekyll ]; then echo "✓ .nojekyll found"; else echo "✗ .nojekyll missing"; fi
+          rm -rf docs
+          cp -r frontend/build docs
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend/build
-          force_orphan: true
-          user_name: github-actions[bot]
-          user_email: github-actions[bot]@users.noreply.github.com
+      - name: Commit and push docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          git commit -m "Deploy: Update docs folder with latest build [skip ci]" || true
+          git push origin main
