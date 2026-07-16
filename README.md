@@ -1,190 +1,117 @@
-# Wandel Reality — XR Studio Website
+<h1 align="center">Hi 👋, I'm Akshad Mishra</h1>
+<h3 align="center">Full-Stack Developer · AI/ML Enthusiast · Creative Technologist</h3>
 
-A scroll-driven, single-page experience for **Wandel Reality**, an XR studio.
-Built with FastAPI + React + MongoDB. Smooth scroll via Lenis, motion via
-Framer Motion, glassmorphism + skeuomorphism design tokens, and a puzzle-themed
-reveal-on-scroll narrative ending with an exploding/reassembling Meta Quest.
-
-```
-/app
-├── backend/   # FastAPI + Motor (MongoDB async driver)
-└── frontend/  # React (CRA + craco), Tailwind, shadcn/ui
-```
+<p align="center">
+  <a href="https://linkedin.com/in/akshadmishra"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a>
+  <a href="mailto:akshadmishra628@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>
+  <a href="https://github.com/Akshad628"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"></a>
+</p>
 
 ---
 
-## 1 · Prerequisites
+### 🚀 About Me
 
-| Tool      | Version |
-| --------- | ------- |
-| Node.js   | ≥ 18    |
-| Yarn      | ≥ 1.22  (use **yarn**, never npm) |
-| Python    | ≥ 3.10  |
-| MongoDB   | ≥ 6.0   (local install or container) |
+Final-year Computer Science undergraduate (B.Tech, CGPA 8.45) with hands-on experience across full-stack development, machine learning, and AI-driven automation. I like building things end-to-end — from a voice-agent admissions platform to a self-correcting job-application pipeline — and pairing that with a creative streak in 3D modeling and game development.
 
----
-
-## 2 · Local Setup (portable)
-
-### a. Clone & install
-
-```bash
-git clone <your-repo-url> wandel-reality
-cd wandel-reality
-```
-
-### b. Backend
-
-```bash
-cd backend
-cp .env.example .env          # edit if needed
-python -m venv .venv
-source .venv/bin/activate     # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn server:app --reload --host 0.0.0.0 --port 8001
-```
-
-Backend is now on `http://localhost:8001`. Try `curl http://localhost:8001/api/`.
-
-### c. Frontend
-
-```bash
-cd ../frontend
-cp .env.example .env          # IMPORTANT — see Google Calendar section below
-yarn install
-yarn start
-```
-
-Frontend on `http://localhost:3000`.
-
-### d. MongoDB
-
-- macOS:  `brew install mongodb-community && brew services start mongodb-community`
-- Linux:  follow [official docs](https://www.mongodb.com/docs/manual/installation/)
-- Docker: `docker run -d -p 27017:27017 --name wr-mongo mongo:7`
-
-The default `MONGO_URL` in `backend/.env` is `mongodb://localhost:27017`.
+- 🔭 Currently building an **AI-powered job application automation pipeline** (n8n + Gemini AI)
+- 🎮 Currently learning **Unity** for a VR project exploring healthcare education
+- 🌍 Exploring international tech career pathways in **Germany / Europe**
+- 🎨 Also active in Blender 3D art, video editing, and creative writing
+- 📫 Reach me at **akshadmishra628@gmail.com**
 
 ---
 
-## 3 · How to connect your Google Calendar (booking)
+### 🛠️ Tech Stack
 
-The "Book a 30-min call" card opens an in-page Google Calendar Appointment Schedule
-in a modal. To wire it up:
+**Languages**
+<p>
+  <img src="https://img.shields.io/badge/C-00599C?style=flat-square&logo=c&logoColor=white">
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img src="https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white">
+  <img src="https://img.shields.io/badge/C%23-239120?style=flat-square&logo=csharp&logoColor=white">
+  <img src="https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=mysql&logoColor=white">
+</p>
 
-1. Sign into [https://calendar.google.com](https://calendar.google.com) on a
-   Google account that has Appointment Schedules enabled (any personal Google
-   account works — no Workspace required as of 2024).
-2. Click **Create → Appointment schedule**.
-3. Set the title (e.g. "Wandel intro call"), duration (e.g. 30 min), availability
-   window, buffer time, and time zone.
-4. Save the schedule, then open it and click **Share → Copy booking page link**.
-   The link looks like `https://calendar.app.google/XXXXXXXX`.
-5. Paste it into `frontend/.env`:
+**Frameworks & Backend**
+<p>
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white">
+  <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white">
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white">
+  <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white">
+  <img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white">
+</p>
 
-   ```bash
-   REACT_APP_BOOKING_URL=https://calendar.app.google/XXXXXXXX
-   ```
+**AI / Data**
+<p>
+  <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white">
+  <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white">
+  <img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white">
+  <img src="https://img.shields.io/badge/Gemini%20AI-8E75B2?style=flat-square&logo=googlegemini&logoColor=white">
+  <img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black">
+  <img src="https://img.shields.io/badge/n8n-EA4B71?style=flat-square&logo=n8n&logoColor=white">
+</p>
 
-6. Restart the frontend (`Ctrl-C` and `yarn start` again, or in Emergent:
-   `sudo supervisorctl restart frontend`).
-
-That's it — clicking "Book a 30-min call" now opens the Google Calendar
-appointment picker in a modal with a fallback **Open in new tab** option in
-case Google blocks the iframe for your account.
-
-> **Want Calendly instead?** Paste your Calendly link
-> (e.g. `https://calendly.com/your-team/intro`) into the same env var.
-> The modal will load it the same way.
-
----
-
-## 4 · Environment variables
-
-### `backend/.env`
-
-| Key            | Purpose                                  |
-| -------------- | ---------------------------------------- |
-| `MONGO_URL`    | MongoDB connection string                |
-| `DB_NAME`      | Database name                            |
-| `CORS_ORIGINS` | Comma-separated allowed origins (or `*`) |
-
-### `frontend/.env`
-
-| Key                           | Purpose                                              |
-| ----------------------------- | ---------------------------------------------------- |
-| `REACT_APP_BACKEND_URL`       | URL of the FastAPI backend (no trailing slash)       |
-| `REACT_APP_BOOKING_URL`       | Google Calendar / Calendly booking URL (optional)    |
-| `REACT_APP_CONTACT_EMAIL`     | Email shown in the Reach section + footer            |
-| `REACT_APP_CONTACT_PHONE`     | Phone shown in the Reach section (optional)          |
-| `REACT_APP_SOCIAL_GITHUB`     | Social link (optional, hidden if empty)              |
-| `REACT_APP_SOCIAL_LINKEDIN`   | Social link (optional, hidden if empty)              |
-| `REACT_APP_SOCIAL_INSTAGRAM`  | Social link (optional, hidden if empty)              |
-| `REACT_APP_SOCIAL_TWITTER`    | Social link (optional, hidden if empty)              |
-
-> **No keys are hardcoded.** Everything is read from env at build time.
+**Creative & Tools**
+<p>
+  <img src="https://img.shields.io/badge/Blender-E87D0D?style=flat-square&logo=blender&logoColor=white">
+  <img src="https://img.shields.io/badge/Unity-000000?style=flat-square&logo=unity&logoColor=white">
+  <img src="https://img.shields.io/badge/DaVinci%20Resolve-233A51?style=flat-square&logo=davinciresolve&logoColor=white">
+  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white">
+</p>
 
 ---
 
-## 5 · API
+### 💼 Experience
 
-| Method | Path             | Body                                                                  |
-| ------ | ---------------- | --------------------------------------------------------------------- |
-| GET    | `/api/`          | health check                                                          |
-| POST   | `/api/reach-out` | `{ name, email, phone?, subject, body, website? }`                    |
-| GET    | `/api/reach-out` | list all submissions (admin — protect or remove before production)    |
-
----
-
-## 6 · Sections (scroll order)
-
-1. **Preloader** — 0 → 100% with scene caption
-2. **Hero** — puzzle image that breaks/reassembles on scroll + cursor parallax
-3. **Ateliers** — *Silence That Remains*, *HCI Showcases*, *ISRO GSLV* — left-curved sweep
-4. **Services** — six XR disciplines, glass + skeu cards
-5. **Storytelling** — Meta Quest rises → rotates 360° → explodes → reassembles
-6. **Reach** — contact form (saved to MongoDB) + booking modal
-7. **Team** — 11 members in a right-curved vertical sweep
-8. **Footer** — incorporation, sitemap, socials, big wordmark
+| Role | Company | Focus |
+|---|---|---|
+| ML Intern | NRSC (National Remote Sensing Centre) | Geospatial analytics dashboard, K-Means segmentation, EDA |
+| AI Developer Intern | Visvam.ai | Conversational AI fitness coach (Streamlit + Mistral 7B) |
+| 3D Architecture Modelling Intern | Infosys | Blender architectural pipeline — modeling to final render |
 
 ---
 
-## 7 · Customising the team
+### 🌟 Featured Projects
 
-Edit the `TEAM` array at the top of `/app/frontend/src/components/wr/Team.jsx`.
-Each entry: `{ name, role, desc }`. Initials are generated automatically.
+**[ADhoc.ai](https://github.com/Akshad628/ADhoc)**
+Full-stack voice-agent admissions platform — FastRTC (WebSocket + VAD + barge-in) pipeline, Groq/Llama 70B inference, Deepgram/ElevenLabs TTS-STT fallback chain, Supabase + Auth0, Redis-backed memory pool.
 
-To use real headshots, replace the initials block with an `<img>` tag using
-your photo URLs.
+**[Macro — AI Fitness Coach](https://github.com/Akshad628/Macro)**
+Context-aware conversational fitness coach shipped as a live Streamlit app, powered by the Hugging Face Inference API and Mistral 7B. [Live demo →](https://jycg5nhyce4i2uqrauxhae.streamlit.app/)
 
----
+**[AI Financial Tracker](https://github.com/Akshad628/ai-finance-tracker)**
+MERN-stack personal finance app — expense logging, EMI tracking, JWT auth, PDF summaries, and Gemini AI-generated spending insights, visualized with Chart.js.
 
-## 8 · Production build
+**AI-Powered Job Application Automation Pipeline**
+n8n workflow that pulls a resume from Google Drive, matches it against LinkedIn listings via a Gemini AI relevance-scoring agent, self-corrects low-scoring matches, and sends Telegram alerts for qualifying roles.
 
-```bash
-cd frontend && yarn build      # outputs to /app/frontend/build
-cd ../backend && uvicorn server:app --host 0.0.0.0 --port 8001 --workers 2
-```
-
-Serve `frontend/build/` behind any static host (nginx, Caddy, Vercel, etc.)
-and point `REACT_APP_BACKEND_URL` at your deployed FastAPI URL.
+**3D Creative Portfolio (Blender 4.5)**
+Shader graph and lighting studies — an emission-lit fantasy sword with particle effects, and a voxel-style architectural scene with PBR texturing and HDRI lighting.
 
 ---
 
-## 9 · Troubleshooting
+### 🎓 Education
 
-- **`Bad gateway` from preview** — backend is up but frontend may still be
-  building; check `sudo supervisorctl status` or
-  `tail -n 60 /var/log/supervisor/frontend.*.log`.
-- **`onAfterSetupMiddleware` error** — `webpack-dev-server` resolution was
-  pinned to v5; we pinned it to `4.15.2` to match CRA 5 (see `package.json`
-  `resolutions`).
-- **Google Calendar iframe is blank** — some Google accounts block iframe
-  embeds. Click "Open in new tab" inside the modal; we fall back to a real
-  Google booking page.
-- **Form submits but nothing saves** — confirm `REACT_APP_BACKEND_URL` is
-  reachable from your browser and Mongo is running.
+**B.Tech, Computer Science & Engineering** — Geethanjali College of Engineering & Technology *(2023 – 2027)*
+CGPA: 8.45 / 10
 
 ---
 
-© 2026 Wandel Reality
+### 📊 GitHub Stats
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=Akshad628&show_icons=true&theme=radical&hide_border=true" height="165">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Akshad628&layout=compact&theme=radical&hide_border=true" height="165">
+</p>
+
+<p align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Akshad628&theme=radical&hide_border=true">
+</p>
+
+---
+
+<p align="center"><i>Open to full-stack, AI/ML, and internship opportunities.</i></p>
