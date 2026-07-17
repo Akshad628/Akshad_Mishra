@@ -228,7 +228,7 @@ body::before {
   50%      { filter: hue-rotate(360deg); }
 }
 .wr-god-mode {
-  animation: wr-hue-shift 6s linear;
+  animation: wr-hue-shift 6s linear infinite;
 }
 
 /* Hero text on top of dark-blue puzzle: invert via blend mode so it reads

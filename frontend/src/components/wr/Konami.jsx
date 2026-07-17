@@ -14,10 +14,10 @@ export default function Konami() {
       if (buf.length > CODE.length) buf.shift();
       if (buf.length === CODE.length && buf.every((k, i) => k === CODE[i])) {
         buf = [];
-        toast.success("🌈 GOD MODE — all collectibles unlocked", { duration: 4000 });
+        toast.success("🌈 GOD MODE — all collectibles unlocked", { duration: 6000 });
         document.body.classList.add("wr-god-mode");
         fillAll();
-        setTimeout(() => document.body.classList.remove("wr-god-mode"), 8000);
+        setTimeout(() => document.body.classList.remove("wr-god-mode"), 20000);
       }
     };
     window.addEventListener("keydown", onKey);
