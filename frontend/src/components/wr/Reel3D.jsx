@@ -92,7 +92,7 @@ export default function Reel3D() {
               <p className="overline mb-3">3d reel · level 04</p>
               <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl tracking-tighter">Worlds I{"\u2019"}ve built</h2>
               <p className="mt-3 text-neutral-600 text-sm sm:text-base max-w-lg">
-                Blender modeling, shading and light. Scroll to sweep through — no tilt, no tricks.
+                Blender modeling, shading and light.
               </p>
             </div>
           </div>

@@ -32,14 +32,23 @@ export default function Reach() {
     }
     setLoading(true);
     try {
-      const payload = { ...form };
-      if (!payload.phone) delete payload.phone;
-      if (!payload.website) delete payload.website;
-      await axios.post(`${API}/reach-out`, payload);
+      const payload = {
+        name: form.name,
+        email: form.email,
+        phone: form.phone || undefined,
+        website: form.website || undefined,
+        _subject: `Portfolio Contact: ${form.subject}`,
+        message: form.body,
+      };
+
+      // Clean undefined keys
+      Object.keys(payload).forEach(key => payload[key] === undefined && delete payload[key]);
+
+      await axios.post(`https://formsubmit.co/ajax/${EMAIL}`, payload);
       toast.success("Message sent — I will get back to you within 2 business days.");
       setForm(empty);
     } catch (err) {
-      const msg = err?.response?.data?.detail || "Could not send. Try again.";
+      const msg = err?.response?.data?.message || "Could not send. Try again.";
       toast.error(typeof msg === "string" ? msg : "Could not send. Try again.");
     } finally {
       setLoading(false);
@@ -83,7 +92,7 @@ export default function Reach() {
             <Field icon={User} label="Name" testid="reach-name" value={form.name} onChange={update("name")} />
             <Field icon={Mail} label="Email" type="email" testid="reach-email" value={form.email} onChange={update("email")} />
             <Field icon={Phone} label="Phone" testid="reach-phone" value={form.phone} onChange={update("phone")} />
-            <Field icon={Globe} label="Website" testid="reach-website" value={form.website} onChange={update("website")} placeholder="https://" />
+            <Field icon={Globe} label="Website" testid="reach-website" value={form.website} onChange={update("website")} placeholder="" />
           </div>
           <div className="mt-4">
             <Field label="Subject" testid="reach-subject" value={form.subject} onChange={update("subject")} />
@@ -141,9 +150,8 @@ function Field({ icon: Icon, label, testid, value, ...props }) {
       <div className="relative mt-2">
         {Icon && (
           <Icon size={16}
-            className={`absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none transition-all duration-300 ${
-              hide ? "opacity-0 -translate-x-2" : "opacity-100"
-            }`} />
+            className={`absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none transition-all duration-300 ${hide ? "opacity-0 -translate-x-2" : "opacity-100"
+              }`} />
         )}
         <input data-testid={testid}
           className={`wr-skeu-input transition-[padding] duration-300 ${Icon ? (hide ? "pl-3.5" : "pl-9") : ""}`}

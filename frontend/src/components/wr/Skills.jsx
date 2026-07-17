@@ -14,7 +14,7 @@ const GROUPS = [
     items: ["React", "Node", "Express", "REST APIs", "MongoDB", "MERN"],
   },
   {
-    icon: Cpu, name: "ML / AI", level: 85,
+    icon: Cpu, name: "ML / AI", level: 70,
     items: ["Pandas", "NumPy", "Scikit-learn", "Plotly", "Ipywidgets", "Gemini", "LLM prompting", "RAG"],
   },
   {
@@ -23,7 +23,7 @@ const GROUPS = [
   },
   {
     icon: Workflow, name: "Automation", level: 78,
-    items: ["n8n", "Google APIs", "Telegram Bot", "Webhooks", "Cron"],
+    items: ["n8n", "APIs", "Telegram Bot", "Webhooks", "Cron"],
   },
   {
     icon: Wrench, name: "Tools", level: 90,

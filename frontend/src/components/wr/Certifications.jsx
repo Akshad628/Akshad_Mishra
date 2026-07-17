@@ -6,8 +6,8 @@ const CERTS = [
   { name: "C Programming", by: "NPTEL", year: "2023", url: process.env.PUBLIC_URL + "/assets/AKSHADMISHRA-CLA - Programmin-certificate.pdf" },
   { name: "Python — 100 Days Bootcamp", by: "Udemy", year: "2024" },
   { name: "Full-Stack Development (MERN)", by: "Udemy", year: "2025" },
-  { name: "Introduction to AI", by: "Sample cert", year: "2024", url: process.env.PUBLIC_URL + "/assets/Intro_AI_Akshad.pdf" },
-  { name: "Quantum Computing", by: "Sample cert", year: "2024", url: process.env.PUBLIC_URL + "/assets/Quantum_Computing_Akshad.pdf" },
+  { name: "Introduction to AI", by: "IBM SkillsBuild", year: "2026", url: process.env.PUBLIC_URL + "/assets/Intro_AI_Akshad.pdf" },
+  { name: "Quantum Computing", by: "IBM SkillsBuild", year: "2026", url: process.env.PUBLIC_URL + "/assets/Quantum_Computing_Akshad.pdf" },
 ];
 
 export default function Certifications() {
@@ -20,7 +20,7 @@ export default function Certifications() {
             <h2 className="font-display text-4xl sm:text-5xl tracking-tighter">Papered up</h2>
           </div>
           <p className="hidden md:block text-neutral-600 text-sm max-w-xs">
-            The stuff people say I should mention. Two sample cert PDFs are wired below.
+            The stuff people say I should mention, so here are my collectibles.
           </p>
         </div>
 
