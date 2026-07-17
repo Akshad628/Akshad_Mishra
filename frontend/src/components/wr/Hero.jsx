@@ -130,27 +130,27 @@ export default function Hero() {
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
-            className="font-display text-5xl sm:text-7xl lg:text-[9rem] leading-[0.9] tracking-tighter text-neutral-900">
+            className="font-display text-5xl sm:text-7xl lg:text-[7.5rem] xl:text-[8.5rem] leading-[0.9] tracking-tighter text-neutral-900">
             Akshad
             <br />
             <span className="italic font-light">Mishra</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.9 }}
-            className="mt-8 max-w-xl mx-auto text-base sm:text-lg text-neutral-600">
+            className="mt-6 max-w-xl mx-auto text-base sm:text-lg text-neutral-600">
             I ship full-stack apps, AI systems and Blender worlds — one puzzle piece at a time.
             Scroll to play through the portfolio.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.9 }}
-            className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            className="mt-7 flex flex-wrap items-center justify-center gap-3">
             <a href="#projects" data-testid="hero-cta-projects" className="wr-skeu-btn">Play the portfolio</a>
             <a href="#reach" data-testid="hero-cta-reach"
               className="px-6 py-3 rounded-full border border-neutral-300 bg-white/60 backdrop-blur-md text-sm font-medium hover:bg-white transition">
               Say hi
             </a>
           </motion.div>
-          <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-500">
+          <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-500">
             press <kbd className="wr-glass rounded px-1.5 py-0.5 mx-1">⌘</kbd>
             <kbd className="wr-glass rounded px-1.5 py-0.5 mx-1">K</kbd>
             for the command palette
