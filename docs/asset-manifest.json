@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Akshad_Mishra/static/css/main.5ab506df.css",
-    "main.js": "/Akshad_Mishra/static/js/main.0d25e454.js",
+    "main.css": "/Akshad_Mishra/static/css/main.3378ad0e.css",
+    "main.js": "/Akshad_Mishra/static/js/main.9857ad36.js",
     "index.html": "/Akshad_Mishra/index.html",
-    "main.5ab506df.css.map": "/Akshad_Mishra/static/css/main.5ab506df.css.map",
-    "main.0d25e454.js.map": "/Akshad_Mishra/static/js/main.0d25e454.js.map"
+    "main.3378ad0e.css.map": "/Akshad_Mishra/static/css/main.3378ad0e.css.map",
+    "main.9857ad36.js.map": "/Akshad_Mishra/static/js/main.9857ad36.js.map"
   },
   "entrypoints": [
-    "static/css/main.5ab506df.css",
-    "static/js/main.0d25e454.js"
+    "static/css/main.3378ad0e.css",
+    "static/js/main.9857ad36.js"
   ]
 }
