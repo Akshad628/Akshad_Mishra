@@ -136,9 +136,9 @@ export default function MiniGame() {
         </div>
       </div>
       <div className="relative w-full aspect-[720/420] rounded-2xl overflow-hidden">
-        <canvas ref={cvsRef} width={W} height={H} className="w-full h-full block bg-white" />
+        <canvas ref={cvsRef} width={W} height={H} className="w-full h-full block bg-white rounded-2xl" />
         {status !== "playing" && (
-          <div className="absolute inset-0 flex items-center justify-center bg-white/70 backdrop-blur">
+          <div className="absolute inset-0 flex items-center justify-center bg-white/70 backdrop-blur rounded-2xl">
             <div className="text-center">
               <p className="font-display text-2xl mb-2">
                 {status === "over" ? "Game Over" : status === "win" ? "Cleared!" : "Ready?"}

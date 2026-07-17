@@ -9,8 +9,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const TRAIL_LEN_DOWN = 28;
-const TRAIL_LEN_UP = 12;
+const TRAIL_LEN_DOWN = 28; // was 70
+const TRAIL_LEN_UP = 12;   // was 22
 const SAMPLE_MS = 16;
 
 export default function CursorTrail({ startSelector = "#reach" }) {
