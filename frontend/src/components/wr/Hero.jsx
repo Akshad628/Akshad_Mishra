@@ -125,7 +125,7 @@ export default function Hero() {
           className="relative z-30 text-center px-6"
         >
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }} className="overline wr-hero-text mb-6">
+            transition={{ duration: 0.7 }} className="overline text-neutral-500 mb-6">
             akshad mishra · builder · storyteller
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
@@ -137,7 +137,7 @@ export default function Hero() {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.9 }}
-            className="mt-8 max-w-xl mx-auto text-base sm:text-lg wr-hero-text-body">
+            className="mt-8 max-w-xl mx-auto text-base sm:text-lg text-neutral-600">
             I ship full-stack apps, AI systems and Blender worlds — one puzzle piece at a time.
             Scroll to play through the portfolio.
           </motion.p>
