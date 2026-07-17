@@ -13,7 +13,7 @@ const PHONE = process.env.REACT_APP_CONTACT_PHONE || "+91 74164 47332";
 const GH = process.env.REACT_APP_SOCIAL_GITHUB || "https://github.com/Akshad628";
 const LN = process.env.REACT_APP_SOCIAL_LINKEDIN || "https://www.linkedin.com/in/akshadmishra";
 const LC = "https://leetcode.com/akshad_mishra/";
-const RESUME = process.env.REACT_APP_RESUME_URL || "#";
+const RESUME = process.env.REACT_APP_RESUME_URL || (process.env.PUBLIC_URL + "/assets/resume.pdf");
 
 const empty = { name: "", email: "", phone: "", subject: "", body: "", website: "" };
 

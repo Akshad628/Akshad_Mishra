@@ -5,7 +5,7 @@
 // =============================================================================
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Sparkles } from "lucide-react";
 import { useAchievement } from "./Achievements";
 import CollectibleSpot from "./CollectibleSpot";
@@ -47,10 +47,37 @@ export default function Reel3D() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   useAchievement(ref, "reel", { title: "3D Reel discovered", icon: Sparkles });
 
-  // Card width + gap in px; the track is (items * cardWidth) wide. Compute how
-  // far to translate: viewport width - total track width = negative translate.
-  // We use vw units so it stays responsive.
-  const x = useTransform(scrollYProgress, [0, 1], ["0vw", `-${(ITEMS.length - 1) * 62}vw`]);
+  const [maxTranslate, setMaxTranslate] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (trackRef.current) {
+        const trackWidth = trackRef.current.scrollWidth;
+        const viewportWidth = window.innerWidth;
+        setMaxTranslate(Math.max(0, trackWidth - viewportWidth));
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    let observer;
+    if (window.ResizeObserver && trackRef.current) {
+      observer = new ResizeObserver(handleResize);
+      observer.observe(trackRef.current);
+      observer.observe(document.body);
+    }
+
+    const timer = setTimeout(handleResize, 150);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (observer) observer.disconnect();
+      clearTimeout(timer);
+    };
+  }, []);
+
+  const x = useTransform(scrollYProgress, [0, 1], [0, -maxTranslate]);
 
   return (
     <section id="reel" ref={ref} data-testid="reel-section" className="relative"
@@ -106,7 +133,7 @@ function SweepCard({ it, i }) {
       transition={{ duration: 0.7, delay: 0.05 * i }}
       whileHover={{ y: -6 }}
       data-testid={`reel-item-${i}`}
-      className="relative wr-glass rounded-3xl overflow-hidden shrink-0 w-[58vw] max-w-[720px] aspect-[4/5]"
+      className="relative wr-glass rounded-3xl overflow-hidden shrink-0 w-[70vw] sm:w-[40vw] md:w-[30vw] lg:w-[25vw] max-w-[380px] aspect-[4/5]"
     >
       <img src={it.image} alt={it.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />

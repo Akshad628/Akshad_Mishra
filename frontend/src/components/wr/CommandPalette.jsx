@@ -20,7 +20,7 @@ const GH = "https://github.com/Akshad628";
 const LN = "https://www.linkedin.com/in/akshadmishra";
 const LC = "https://leetcode.com/akshad_mishra/";
 const EM = "akshadmishra628@gmail.com";
-const RESUME = process.env.REACT_APP_RESUME_URL || "#";
+const RESUME = process.env.REACT_APP_RESUME_URL || (process.env.PUBLIC_URL + "/assets/resume.pdf");
 
 const SECTIONS = [
   { id: "projects", label: "Projects" },

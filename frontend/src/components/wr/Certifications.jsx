@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { Award, ExternalLink } from "lucide-react";
 
 const CERTS = [
-  { name: "Java & DBMS (SQL)", by: "Oracle", year: "2024" },
-  { name: "C Programming", by: "NPTEL", year: "2023" },
+  { name: "Java & DBMS (SQL)", by: "Oracle", year: "2024", url: process.env.PUBLIC_URL + "/assets/javaCertificate.pdf" },
+  { name: "C Programming", by: "NPTEL", year: "2023", url: process.env.PUBLIC_URL + "/assets/AKSHADMISHRA-CLA - Programmin-certificate.pdf" },
   { name: "Python — 100 Days Bootcamp", by: "Udemy", year: "2024" },
   { name: "Full-Stack Development (MERN)", by: "Udemy", year: "2025" },
-  { name: "Introduction to AI", by: "Sample cert", year: "2024" },
-  { name: "Quantum Computing", by: "Sample cert", year: "2024" },
+  { name: "Introduction to AI", by: "Sample cert", year: "2024", url: process.env.PUBLIC_URL + "/assets/Intro_AI_Akshad.pdf" },
+  { name: "Quantum Computing", by: "Sample cert", year: "2024", url: process.env.PUBLIC_URL + "/assets/Quantum_Computing_Akshad.pdf" },
 ];
 
 export default function Certifications() {
@@ -27,13 +27,15 @@ export default function Certifications() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {CERTS.map((c, i) => (
             <motion.a key={c.name}
-              href={c.url || "#"}
+              href={c.url || undefined}
+              onClick={(e) => { if (!c.url) e.preventDefault(); }}
+              style={{ cursor: c.url ? "pointer" : "default" }}
               target={c.url ? "_blank" : undefined}
               rel="noreferrer"
               data-testid={`cert-${i}`}
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.05 }}
-              whileHover={{ y: -3 }}
+              whileHover={c.url ? { y: -3 } : {}}
               className="wr-glass rounded-2xl p-5 flex items-start gap-4 group">
               <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
                 style={{
