@@ -32,21 +32,9 @@ export default function MiniGame() {
     stateRef.current = s;
 
     const kd = (e) => {
-      if (["ArrowLeft", "ArrowRight", " "].includes(e.key)) {
-        e.preventDefault();
-      }
       if (e.key === "ArrowLeft") s.keys.l = true;
       if (e.key === "ArrowRight") s.keys.r = true;
-      if (e.key === " ") {
-        setStatus((st) => {
-          if (st === "ready" || st === "over" || st === "win") {
-            setScore(0);
-            setLives(3);
-            return "playing";
-          }
-          return st;
-        });
-      }
+      if (e.key === " ") setStatus((st) => (st === "ready" || st === "over" || st === "win" ? "playing" : st));
     };
     const ku = (e) => {
       if (e.key === "ArrowLeft") s.keys.l = false;
@@ -134,12 +122,7 @@ export default function MiniGame() {
     };
   }, [status, best]);
 
-  const handleStart = (e) => {
-    if (e) e.currentTarget.blur();
-    setScore(0);
-    setLives(3);
-    setStatus("playing");
-  };
+  const restart = () => { setScore(0); setLives(3); setStatus("ready"); };
 
   return (
     <div data-testid="minigame" className="p-6">
@@ -160,7 +143,7 @@ export default function MiniGame() {
               <p className="font-display text-2xl mb-2">
                 {status === "over" ? "Game Over" : status === "win" ? "Cleared!" : "Ready?"}
               </p>
-              <button onClick={handleStart} className="wr-skeu-btn">
+              <button onClick={restart} className="wr-skeu-btn">
                 {status === "ready" ? "Start (or press Space)" : "Play again"}
               </button>
             </div>

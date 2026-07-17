@@ -12,6 +12,13 @@ import CollectibleSpot from "./CollectibleSpot";
 
 const ITEMS = [
   {
+    title: "GSLV Launch Simulation",
+    tag: "Unity · Meta Quest 3 · VR",
+    year: "2025",
+    desc: "VR launch simulation prototype for ISRO VSSC MoU. Created 3D models of the GSLV rocket, launch pad, and control room, integrating them in Unity for an immersive Meta Quest 3 experience.",
+    image: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1600&q=85",
+  },
+  {
     title: "Fantasy Sword",
     tag: "Blender · Emission · Particles",
     year: "2025",
