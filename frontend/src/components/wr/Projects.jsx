@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Github, ExternalLink, Trophy } from "lucide-react";
 import { useAchievement } from "./Achievements";
 import CollectibleSpot from "./CollectibleSpot";
@@ -49,7 +49,16 @@ const PROJECTS = [
 
 function Card({ p, i, total, progress }) {
   const t0 = i / total, t1 = (i + 1) / total;
-  const x = useTransform(progress, [t0, t1], [-220, 60]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const x = useTransform(progress, [t0, t1], isMobile ? [0, 0] : [-220, 60]);
   const y = useTransform(progress, [t0, t1], [120, 0]);
   const rot = useTransform(progress, [t0, t1], [-8, 0]);
   const op = useTransform(progress, [t0 - 0.05, t0 + 0.05, t1 - 0.05, t1 + 0.1], [0, 1, 1, 0.6]);
